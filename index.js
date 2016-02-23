@@ -7,5 +7,24 @@
 // 	console.log('db connection succeeded')
 // })
 
-var synonyms = [{"synonyms": ["anarchical", "lawless"], "word": "anarchic", "numberOfSynonyms": 2},
- 								{"synonyms": ["anarchic", "lawless"], "word": "anarchical", "numberOfSynonyms": 2}]
+function wrapWith (tag, str, className) {
+	return '<' + tag + ' class=' + '"' + className + '"' + '>' + str + '</' + tag + '>'
+}
+
+function buildSuggestions(record) {
+  var synWithSpan = '';
+  record.synonyms.forEach(function(synonym){
+    synWithSpan += wrapWith('span', synonym, 'suggestion');  
+  }); 
+  return wrapWith('span', synWithSpan, 'suggestions');
+}
+
+
+module.exports = {
+	wrapWith: wrapWith,
+	buildSuggestions: buildSuggestions
+}
+
+// function wrapWith(tag, str, className) {
+//   return '<' + tag + ' class=' + '"' + className + '"' + '>' + str + '</' + tag + '>'; 
+// }
