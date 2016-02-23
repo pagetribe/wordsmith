@@ -11,20 +11,24 @@ function wrapWith (tag, str, className) {
 	return '<' + tag + ' class=' + '"' + className + '"' + '>' + str + '</' + tag + '>'
 }
 
-function buildSuggestions(record) {
-  var synWithSpan = '';
-  record.synonyms.forEach(function(synonym){
-    synWithSpan += wrapWith('span', synonym, 'suggestion');  
-  }); 
-  return wrapWith('span', synWithSpan, 'suggestions');
+function wrapSynonyms(synonyms) {
+  return wrapWith('span', wrapEachSynonymWithSuggestionSpan(synonyms), 'suggestions');
 }
+
+function wrapEachSynonymWithSuggestionSpan(synonyms) {
+  return synonyms.map(wrapWithSugestionSpan).join('')
+}
+
+function wrapWithSugestionSpan(synonym){
+    return wrapWith('span', synonym, 'suggestion');
+  }
 
 
 module.exports = {
-	wrapWith: wrapWith,
-	buildSuggestions: buildSuggestions
+  wrapWith     : wrapWith,
+  wrapSynonyms : wrapSynonyms
 }
 
 // function wrapWith(tag, str, className) {
-//   return '<' + tag + ' class=' + '"' + className + '"' + '>' + str + '</' + tag + '>'; 
+//   return '<' + tag + ' class=' + '"' + className + '"' + '>' + str + '</' + tag + '>';
 // }

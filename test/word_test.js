@@ -11,10 +11,9 @@ describe('wordsmith', function() {
 	describe('buildSuggestions', function(){
 		it('builds out the suggestions', function() {
 			var builtSuggestions = '<span class="suggestions"><span class="suggestion">anarchical</span><span class="suggestion">lawless</span></span>'
-			var synonyms = [{"synonyms": ["anarchical", "lawless"], "word": "anarchic", "numberOfSynonyms": 2},
- 							{"synonyms": ["anarchic", "lawless"], "word": "anarchical", "numberOfSynonyms": 2}]
-			expect(wordsmith.buildSuggestions(synonyms[0])).to.equal(builtSuggestions)
+			var word = [{"synonyms": ["anarchical", "lawless"], "word": "anarchic", "numberOfSynonyms": 2}]
+			expect(wordsmith.wrapSynonyms(word[0].synonyms)).to.equal(builtSuggestions)
 		})
 	})
-	
+
 })
