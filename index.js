@@ -12,7 +12,7 @@ function wrapWith (tag, str, className) {
 }
 
 function wrapSynonyms(synonyms) {
-  return wrapWith('span', wrapEachSynonymWithSuggestionSpan(synonyms), 'suggestions');
+  return wrapWith('span', wrapEachSynonymWithSuggestionSpan(synonyms), 'suggestions')
 }
 
 function wrapEachSynonymWithSuggestionSpan(synonyms) {
@@ -20,8 +20,8 @@ function wrapEachSynonymWithSuggestionSpan(synonyms) {
 }
 
 function wrapWithSugestionSpan(synonym){
-    return wrapWith('span', synonym, 'suggestion');
-  }
+  return wrapWith('span', synonym, 'suggestion')
+}
 
 
 module.exports = {
