@@ -18,6 +18,10 @@
   "homepage": "https://github.com/pagetribe/wordsmith",
   "devDependencies": {
     "chai": "^3.5.0",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "webpack": "^1.12.14"
+  },
+  "dependencies": {
+    "medium.js": "^1.0.1"
   }
 }
