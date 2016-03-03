@@ -8,7 +8,7 @@ describe('wordsmith', function() {
 		})
 	})
 
-	describe('buildSuggestions', function(){
+	describe('wrapSynonyms', function(){
 		it('builds out the suggestions', function() {
 			var builtSuggestions = '<span class="suggestions"><span class="suggestion">anarchical</span><span class="suggestion">lawless</span></span>'
 			var word = [{"synonyms": ["anarchical", "lawless"], "word": "anarchic", "numberOfSynonyms": 2}]

@@ -3,7 +3,14 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <!-- <script src="src/app.js"></script> -->
+  <script src="node_modules/rangy/lib/rangy-core.js"></script>
+  <script src="node_modules/rangy/lib/rangy-classapplier.js"></script>
+  <script src="node_modules/undo.js/undo.js"></script>
+  <script src="node_modules/medium.js/medium.js"></script>
+  <script src="src/bundle.js"></script>
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="node_modules/medium.js/medium.css">
 
   <!--[if lt IE 9]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -11,9 +18,52 @@
 </head>
 
 <body>
-  <!-- <script src="js/scripts.js"></script> -->
-  <div id="editor" contenteditable="true">
-    ...
+  <br><br>
+
+  <div class="toolbar-top">
+    <span class="toolbar">
+     <span class="li">LI</span>
+    </span>
   </div>
+  <div id="rich_with_insert_html_object" class="article demo">
+  ...object
+  </div>
+
+  <div id='editor' contenteditable='true'>...hello</div>
+
+  <script>
+    (function() {
+
+      var article = document.getElementById('rich_with_insert_html_object')
+      var medium = new Medium({
+        element: article,
+        mode: Medium.richMode,
+        placeholder: 'Your Article',
+        tags: null,
+        attributes: null
+      })
+
+      //example of how to insert into contenteditible
+      var container = article.parentNode
+
+    	container.querySelector('.li').onmousedown = function() {
+    		var ul = document.createElement('ul')
+    		var li = document.createElement('li')
+
+    		ul.style.border = 'dashed 5px #F92672';
+    		ul.className = 'ul-special';
+    		ul.appendChild(li);
+
+    		li.innerHTML = 'I came from an Object!';
+    		li.style.color = '#57ad68';
+    		li.className = 'li-special';
+
+  	    medium.focus();
+  	    medium.insertHtml(ul);
+
+  	    return false;
+    	};
+    })();
+  </script>
 </body>
 </html>
