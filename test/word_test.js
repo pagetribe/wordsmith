@@ -16,4 +16,14 @@ describe('wordsmith', function() {
 		})
 	})
 
+	describe('appendSuggestionsToLastWord', function(){
+		it('inserts the suggestion object into a string', function(){
+			var string = 'Life was turbulent and anarchic'
+			var expectedString = 'Life was turbulent and <span class="suggestions"><span class="suggestion">anarchical</span><span class="suggestion">lawless</span></span>anarchic'
+			var word = [{"synonyms": ["anarchical", "lawless"], "word": "anarchic", "numberOfSynonyms": 2}]
+			var suggestions = wordsmith.wrapSynonyms(word[0].synonyms)
+			expect(wordsmith.appendSuggestionsToLastWord(suggestions, string)).to.equal(expectedString)
+		})
+	})
+
 })

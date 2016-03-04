@@ -23,10 +23,15 @@ function wrapWithSugestionSpan(synonym){
   return wrapWith('span', synonym, 'suggestion')
 }
 
+function appendSuggestionsToLastWord(suggestions, str) {
+	return str.replace(/(\S+)\s*$/, suggestions + '$1')
+}
+
 
 module.exports = {
   wrapWith     : wrapWith,
-  wrapSynonyms : wrapSynonyms
+  wrapSynonyms : wrapSynonyms,
+  appendSuggestionsToLastWord: appendSuggestionsToLastWord
 }
 
 // function wrapWith(tag, str, className) {
