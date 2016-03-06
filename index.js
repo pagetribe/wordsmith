@@ -28,7 +28,8 @@ function appendSuggestionsToLastWord(suggestions, str) {
 }
 
 function wrapWord(word, str) {
-  return str.replace(word, wrapWith('span', word, 'word'))
+  var regex = new RegExp('\\b' + word + '\\b') //whole word
+  return str.replace(regex, wrapWith('span', word, 'word'))
 }
 
 
