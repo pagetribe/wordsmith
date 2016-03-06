@@ -26,4 +26,10 @@ describe('wordsmith', function() {
 		})
 	})
 
+  describe('wrapWord', function(){
+    var string = 'Life was turbulent and anarchic'
+    it('wraps the word in span class word', function(){
+      expect(wordsmith.wrapWord('anarchic', string)).to.equal('Life was turbulent and <span class="word">anarchic</span>')
+    })
+  })
 })

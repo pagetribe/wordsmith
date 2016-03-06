@@ -7,8 +7,8 @@
 // 	console.log('db connection succeeded')
 // })
 
-function wrapWith (tag, str, className) {
-	return '<' + tag + ' class=' + '"' + className + '"' + '>' + str + '</' + tag + '>'
+function wrapWith (tag, text, className) {
+	return '<' + tag + ' class=' + '"' + className + '"' + '>' + text + '</' + tag + '>'
 }
 
 function wrapSynonyms(synonyms) {
@@ -27,11 +27,16 @@ function appendSuggestionsToLastWord(suggestions, str) {
 	return str.replace(/(\S+)\s*$/, suggestions + '$1')
 }
 
+function wrapWord(word, str) {
+  return str.replace(word, wrapWith('span', word, 'word'))
+}
+
 
 module.exports = {
   wrapWith     : wrapWith,
   wrapSynonyms : wrapSynonyms,
-  appendSuggestionsToLastWord: appendSuggestionsToLastWord
+  appendSuggestionsToLastWord: appendSuggestionsToLastWord,
+  wrapWord : wrapWord
 }
 
 // function wrapWith(tag, str, className) {
