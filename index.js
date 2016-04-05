@@ -11,7 +11,7 @@ function wrapWith (tag, text, className) {
 	return '<' + tag + ' class=' + '"' + className + '"' + '>' + text + '</' + tag + '>'
 }
 
-function wrapSynonyms(synonyms) {
+function buildSuggestions(synonyms) {
   return wrapWith('span', wrapEachSynonymWithSuggestionSpan(synonyms), 'suggestions')
 }
 
@@ -32,12 +32,36 @@ function wrapWord(word, str) {
   return str.replace(regex, wrapWith('span', word, 'word'))
 }
 
+function synonymiseLastWord(str) {
+  var lastWord = str.match(/(\S+)\s*$/)[0] //needed for lookup only
+  var word = [{"synonyms": ["anarchical", "lawless"], "word": "anarchic", "numberOfSynonyms": 2}]
+
+  var suggestions = buildSuggestions(word[0].synonyms)
+  var withSuggestions = appendSuggestionsToLastWord(suggestions, str)
+
+  str =  wrapWord(lastWord, withSuggestions)
+  return str
+}
+
+function findSynonyms(word) {
+  // search object for word and get synonyms -> obj.synonyms
+  // {"synonyms": ["anarchical", "lawless"], "word": "anarchic", "numberOfSynonyms": 2}
+  synonyms = [
+    {"synonyms": ["anarchical", "lawless"], "word": "anarchic", "numberOfSynonyms": 2},
+    {"synonyms": ["large", "huge"], "word": "big", "numberOfSynonyms": 2}
+  ]
+  return synonyms.reduce(function(synonym) { console.log(synonym.word); if (synonym.word == word) { return synonym.synonyms } })
+  // return synonyms
+}
 
 module.exports = {
   wrapWith     : wrapWith,
-  wrapSynonyms : wrapSynonyms,
+  buildSuggestions : buildSuggestions,
   appendSuggestionsToLastWord: appendSuggestionsToLastWord,
-  wrapWord : wrapWord
+  wrapWord : wrapWord,
+  synonymiseLastWord : synonymiseLastWord,
+  findSynonyms : findSynonyms
+
 }
 
 // function wrapWith(tag, str, className) {
