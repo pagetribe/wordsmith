@@ -43,8 +43,9 @@ describe('wordsmith', function() {
   })
 
   describe('findSynonyms', function() {
-    it('returns the synonyms for a give word', function(){
-      expect(wordsmith.findSynonyms('anarchic')).to.eql(["anarchical", "lawless"])
+    it('returns the synonyms for a given word', function(){
+      // expect(wordsmith.findSynonyms('anarchic')).to.eql(["anarchical", "lawless"])
+      expect(wordsmith.findSynonyms('big')).to.eql(["large", "huge"])
     })
   })
 })

@@ -34,9 +34,7 @@ function wrapWord(word, str) {
 
 function synonymiseLastWord(str) {
   var lastWord = str.match(/(\S+)\s*$/)[0] //needed for lookup only
-  var word = [{"synonyms": ["anarchical", "lawless"], "word": "anarchic", "numberOfSynonyms": 2}]
-
-  var suggestions = buildSuggestions(word[0].synonyms)
+  var suggestions = buildSuggestions(findSynonyms(lastWord))
   var withSuggestions = appendSuggestionsToLastWord(suggestions, str)
 
   str =  wrapWord(lastWord, withSuggestions)
@@ -44,14 +42,11 @@ function synonymiseLastWord(str) {
 }
 
 function findSynonyms(word) {
-  // search object for word and get synonyms -> obj.synonyms
-  // {"synonyms": ["anarchical", "lawless"], "word": "anarchic", "numberOfSynonyms": 2}
   synonyms = [
     {"synonyms": ["anarchical", "lawless"], "word": "anarchic", "numberOfSynonyms": 2},
     {"synonyms": ["large", "huge"], "word": "big", "numberOfSynonyms": 2}
   ]
-  return synonyms.reduce(function(synonym) { console.log(synonym.word); if (synonym.word == word) { return synonym.synonyms } })
-  // return synonyms
+  return synonyms.filter(function(synonym) { return synonym.word == word })[0].synonyms
 }
 
 module.exports = {
