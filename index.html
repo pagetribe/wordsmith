@@ -37,7 +37,7 @@
                 range = sel.getRangeAt(0).cloneRange();
                 range.collapse(true);
                 range.setStart(containerEl, 0);
-                precedingChar = range.toString().split(" ").pop(); //gets word before caret
+                precedingChar = range.toString().split(" ").pop().replace(/[.,!?:;'"-%]+/g,''); //gets word before caret and removes punctuation
                 // precedingChar = range.toString().slice(-1);
             }
         } else if ( (sel = document.selection) && sel.type != "Control") {
@@ -53,6 +53,17 @@
 
     var editableEl = document.getElementById("editable");
     getCharacterPrecedingCaret(editableEl);
+
+    editableEl.onkeyup = function(e) {
+      if(e.keyCode == 32) {
+        spacePressed();
+      }
+    }
+
+    function spacePressed() {
+      console.log('space pressed')
+      getCharacterPrecedingCaret(editableEl);
+    }
   </script>
 
 
