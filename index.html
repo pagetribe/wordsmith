@@ -18,15 +18,15 @@
 </head>
 
 <body>
-
-  <div contenteditable="true" id="editable">
-    Here is some text. Please put the caret somewhere in here.
-  </div>
-  <div id="precedingChar" style="font-weight: bold"></div>
+<br>
+<br>
+<br>
+  <div contenteditable="true" id="editable">Here is some text.</div>
+  <div id="precedingWord" style="font-weight: bold"></div>
 
   <script>
-    function getCharacterPrecedingCaret(containerEl) {
-        var precedingChar = "";
+    function getWordPrecedingCaret(containerEl) {
+        var precedingWord = "";
         var sel;
         var range;
         var precedingRange;
@@ -35,24 +35,43 @@
             sel = window.getSelection();
             if (sel.rangeCount > 0) {
                 range = sel.getRangeAt(0).cloneRange();
-                range.collapse(true);
+                range.collapse(false);
+                // sel.collapse(containerEl.firstChild, 10)
                 range.setStart(containerEl, 0);
-                precedingChar = range.toString().split(" ").pop().replace(/[.,!?:;'"-%]+/g,''); //gets word before caret and removes punctuation
-                // precedingChar = range.toString().slice(-1);
+                // TODO: see if regex get the whole word (and maybe greater than 3 chars in length) think this can be make more efficient
+                precedingWord = range.toString().split(" ").pop().replace(/[.,!?:;'"-%]+/g,''); //gets word before caret and removes punctuation
+
+                // precedingWord = range.toString().slice(-1);
+
+                insertElement(sel);
+                moveCaretToEnd(sel, containerEl, precedingWord);
+
+
+                //move caret to end
+                // var range = document.createRange();
+                // range.selectNodeContents(containerEl);
+                // range.collapse(true)
+                // range.setStart(containerEl, 1);
+                // range.setEnd(containerEl, 2)
+                // range.collapse(true);
+                // var sel = window.getSelection();
+                // sel.removeAllRanges();
+                // sel.addRange(range);
+
             }
-        } else if ( (sel = document.selection) && sel.type != "Control") {
-            range = sel.createRange();
-            precedingRange = range.duplicate();
-            precedingRange.moveToElementText(containerEl);
-            precedingRange.setEndPoint("EndToStart", range);
-            precedingChar = precedingRange.text.slice(-1);
+        // } else if ( (sel = document.selection) && sel.type != "Control") {
+        //     range = sel.createRange();
+        //     precedingRange = range.duplicate();
+        //     precedingRange.moveToElementText(containerEl);
+        //     precedingRange.setEndPoint("EndToStart", range);
+        //     precedingWord = precedingRange.text.slice(-1);
         }
-        console.log(precedingChar)
-        return precedingChar;
+        console.log(precedingWord)
+        return precedingWord;
     }
 
     var editableEl = document.getElementById("editable");
-    getCharacterPrecedingCaret(editableEl);
+    getWordPrecedingCaret(editableEl);
 
     editableEl.onkeyup = function(e) {
       if(e.keyCode == 32) {
@@ -61,8 +80,33 @@
     }
 
     function spacePressed() {
-      console.log('space pressed')
-      getCharacterPrecedingCaret(editableEl);
+      getWordPrecedingCaret(editableEl);
+    }
+
+    function insertElement(sel) {
+      var range = sel.getRangeAt(0).cloneRange();
+      range.collapse(false);
+      var el = document.createElement("div");
+      // // el.innerHTML = html;
+      el.innerHTML = "<span>asdf </span>";
+      var frag = document.createDocumentFragment(), node, lastNode;
+      while ( (node = el.firstChild) ) {
+          lastNode = frag.appendChild(node);
+      }
+      range.insertNode(frag);
+    }
+
+    // think this need to be a callback, i think this is getting the selection before insertElement has finished.
+    function moveCaretToEnd(sel, containerEl, precedingWord) {
+      // var range = document.createRange();
+      var sel = window.getSelection();
+      var range = sel.getRangeAt(0).cloneRange();
+      console.log(range.endOffset)
+      range.setStart(containerEl.childNodes[0], sel.anchorOffset + precedingWord.length);
+      range.collapse(true);
+      sel.removeAllRanges();
+      sel.addRange(range);
+      console.log(range.endOffset)
     }
   </script>
 
