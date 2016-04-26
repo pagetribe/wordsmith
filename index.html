@@ -136,84 +136,85 @@
   <script src="node_modules/rangy/lib/rangy-core.js"></script>
   <script src="node_modules/rangy/lib/rangy-classapplier.js"></script>
   <script src="src/medium.js"></script>
+  <script src="src/bundle.js"></script>
 
   <script>
-    (function() {
-      var article = document.getElementById('rich_with_insert_html'),
-      container = article.parentNode,
-      medium = new Medium({
-        element: article,
-        mode: Medium.richMode,
-        placeholder: 'Your Article',
-        attributes: null,
-        tags: null
-      });
+    // (function() {
+    //   var article = document.getElementById('rich_with_insert_html'),
+    //   container = article.parentNode,
+    //   medium = new Medium({
+    //     element: article,
+    //     mode: Medium.richMode,
+    //     placeholder: 'Your Article',
+    //     attributes: null,
+    //     tags: null
+    //   });
 
-      container.querySelector('.insert').onmousedown = function() {
-        medium.focus();
-        medium.insertHtml(
-          '<span style="background-color: yellow;">\
-          Happy day!  I can work with buttons too!\
-        </span>&nbsp;'
-        );
+    //   container.querySelector('.insert').onmousedown = function() {
+    //     medium.focus();
+    //     medium.insertHtml(
+    //       '<span style="background-color: yellow;">\
+    //       Happy day!  I can work with buttons too!\
+    //     </span>&nbsp;'
+    //     );
 
-        return false;
-      };
+    //     return false;
+    //   };
 
 
-      function getWordPrecedingCaret(containerEl) {
-        var precedingWord = "";
-        var sel;
-        var range;
-        var precedingRange;
+    //   function getWordPrecedingCaret(containerEl) {
+    //     var precedingWord = "";
+    //     var sel;
+    //     var range;
+    //     var precedingRange;
 
-        if (window.getSelection) {
-          sel = window.getSelection();
-          if (sel.rangeCount > 0) {
-            range = sel.getRangeAt(0).cloneRange();
-            range.collapse(false);
-              // sel.collapse(containerEl.firstChild, 0)
-              range.setStart(containerEl, 0);
-              // TODO: see if regex get the whole word (and maybe greater than 3 chars in length) think this can be make more efficient
-              precedingWord = range.toString().split(" ").pop().replace(/[.,!?:;'"-%]+/g,''); //gets word before caret and removes punctuation
-            }
-          } else if ( (sel = document.selection) && sel.type != "Control") {
-            range = sel.createRange();
-            precedingRange = range.duplicate();
-            precedingRange.moveToElementText(containerEl);
-            precedingRange.setEndPoint("EndToStart", range);
-            precedingWord = precedingRange.text.slice(-1);
-          }
-          console.log(precedingWord)
-          return precedingWord;
-        }
+    //     if (window.getSelection) {
+    //       sel = window.getSelection();
+    //       if (sel.rangeCount > 0) {
+    //         range = sel.getRangeAt(0).cloneRange();
+    //         range.collapse(false);
+    //           // sel.collapse(containerEl.firstChild, 0)
+    //           range.setStart(containerEl, 0);
+    //           // TODO: see if regex get the whole word (and maybe greater than 3 chars in length) think this can be make more efficient
+    //           precedingWord = range.toString().split(" ").pop().replace(/[.,!?:;'"-%]+/g,''); //gets word before caret and removes punctuation
+    //         }
+    //       } else if ( (sel = document.selection) && sel.type != "Control") {
+    //         range = sel.createRange();
+    //         precedingRange = range.duplicate();
+    //         precedingRange.moveToElementText(containerEl);
+    //         precedingRange.setEndPoint("EndToStart", range);
+    //         precedingWord = precedingRange.text.slice(-1);
+    //       }
+    //       console.log(precedingWord)
+    //       return precedingWord;
+    //     }
 
-        getWordPrecedingCaret(article);
+    //     getWordPrecedingCaret(article);
 
-        article.onkeyup = function(e) {
-          if(e.keyCode == 32) {
-            spacePressed();
-            insertElement();
-          }
-        }
+    //     article.onkeyup = function(e) {
+    //       if(e.keyCode == 32) {
+    //         spacePressed();
+    //         insertElement();
+    //       }
+    //     }
 
-        function spacePressed() {
-          getWordPrecedingCaret(article);
-        }
+    //     function spacePressed() {
+    //       getWordPrecedingCaret(article);
+    //     }
 
-        function insertElement() {
-          medium.focus();
-          medium.insertHtml(
-            '<span style="background-color: yellow;">\
-              Happy day!\
-            </span>&nbsp;'
-          // '<span class="suggestions"><span class="suggestion">anarchical</span><span class="suggestion">lawless</span></span>' + '&nbsp'
-        );
+    //     function insertElement() {
+    //       medium.focus();
+    //       medium.insertHtml(
+    //         '<span style="background-color: yellow;">\
+    //           Happy day!\
+    //         </span>&nbsp;'
+    //       // '<span class="suggestions"><span class="suggestion">anarchical</span><span class="suggestion">lawless</span></span>' + '&nbsp'
+    //     );
 
-          return false;
-        }
+    //       return false;
+    //     }
 
-      })();
+    //   })();
     </script>
 
 

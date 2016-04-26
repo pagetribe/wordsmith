@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./test -w"
+    "test": "mocha ./test -w",
+    "webpack-watch": "node_modules/.bin/webpack --progress --colors --watch"
   },
   "repository": {
     "type": "git",
@@ -19,7 +20,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^2.4.5",
-    "webpack": "^1.12.14"
+    "webpack": "^1.13.0"
   },
   "dependencies": {
     "medium.js": "^1.0.1"
