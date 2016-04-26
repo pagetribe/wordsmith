@@ -153,24 +153,78 @@
         medium.focus();
         medium.insertHtml(
           '<span style="background-color: yellow;">\
-            Happy day!  I can work with buttons too!\
-          </span>&nbsp;'
+          Happy day!  I can work with buttons too!\
+        </span>&nbsp;'
         );
 
         return false;
       };
-    })();
-  </script>
+
+
+      function getWordPrecedingCaret(containerEl) {
+        var precedingWord = "";
+        var sel;
+        var range;
+        var precedingRange;
+
+        if (window.getSelection) {
+          sel = window.getSelection();
+          if (sel.rangeCount > 0) {
+            range = sel.getRangeAt(0).cloneRange();
+            range.collapse(false);
+              // sel.collapse(containerEl.firstChild, 0)
+              range.setStart(containerEl, 0);
+              // TODO: see if regex get the whole word (and maybe greater than 3 chars in length) think this can be make more efficient
+              precedingWord = range.toString().split(" ").pop().replace(/[.,!?:;'"-%]+/g,''); //gets word before caret and removes punctuation
+            }
+          } else if ( (sel = document.selection) && sel.type != "Control") {
+            range = sel.createRange();
+            precedingRange = range.duplicate();
+            precedingRange.moveToElementText(containerEl);
+            precedingRange.setEndPoint("EndToStart", range);
+            precedingWord = precedingRange.text.slice(-1);
+          }
+          console.log(precedingWord)
+          return precedingWord;
+        }
+
+        getWordPrecedingCaret(article);
+
+        article.onkeyup = function(e) {
+          if(e.keyCode == 32) {
+            spacePressed();
+            insertElement();
+          }
+        }
+
+        function spacePressed() {
+          getWordPrecedingCaret(article);
+        }
+
+        function insertElement() {
+          medium.focus();
+          medium.insertHtml(
+            '<span style="background-color: yellow;">\
+              Happy day!\
+            </span>&nbsp;'
+          // '<span class="suggestions"><span class="suggestion">anarchical</span><span class="suggestion">lawless</span></span>' + '&nbsp'
+        );
+
+          return false;
+        }
+
+      })();
+    </script>
 
 
 
 
-  <!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
+    <!-- aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa -->
 
 
   <!-- <div id="rich_with_insert_html_object" class="article demo">
   ...object
-  </div> -->
+</div> -->
 <!--
   <div id='editor' contenteditable='true'>...hello</div>
 
