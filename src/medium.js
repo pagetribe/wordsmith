@@ -938,7 +938,7 @@ Medium.defaultSettings = {
 				if (Medium.activeElement === el) {
 					Medium.activeElement = null;
 				}
-				
+
 				medium.settings.onBlur(e);
 				medium.placeholders();
 			});
@@ -1154,12 +1154,12 @@ Medium.defaultSettings = {
 
                     if( settings.mode === Medium.inlineMode || settings.mode === Medium.inlineRichMode ){
                         e.target.textContent = cache.originalVal;
-                        
+
                         if (settings.element.blur) {
                             settings.element.blur();
                         } else if (settings.element.onblur) {
                             settings.element.onblur();
-                        }   
+                        }
                         return false;
                     }
                 },
@@ -1175,7 +1175,7 @@ Medium.defaultSettings = {
                                 settings.element.blur();
                             } else if (settings.element.onblur) {
                                 settings.element.onblur();
-                            }	
+                            }
                             return false;
 			}
 
