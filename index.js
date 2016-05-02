@@ -27,18 +27,18 @@ function appendSuggestionsToLastWord(suggestions, str) {
 	return str.replace(/(\S+)\s*$/, suggestions + '$1')
 }
 
-function wrapWord(word, str) {
+function wrapMainWordWithWordClassSpan(word, str) {
   var regex = new RegExp('\\b' + word + '\\b') //whole word
   return str.replace(regex, wrapWith('span', word, 'word'))
 }
 
 function synonymiseLastWord(str) {
-  var lastWord = str.match(/(\S+)\s*$/)[0] //needed for lookup only
+  var lastWord = str.match(/(\S+)\s*$/)[0].replace(/[.,!?:;'"-%]+/g,'').trim() //needed for lookup only
   var foundSynonyms = findSynonyms(lastWord)
   if(foundSynonyms) {
     var suggestions = buildSuggestions(foundSynonyms)
     var withSuggestions = appendSuggestionsToLastWord(suggestions, str)
-    return wrapWord(lastWord, withSuggestions)
+    return wrapMainWordWithWordClassSpan(lastWord, withSuggestions)
   }
 }
 
@@ -58,7 +58,7 @@ module.exports = {
   wrapWith     : wrapWith,
   buildSuggestions : buildSuggestions,
   appendSuggestionsToLastWord: appendSuggestionsToLastWord,
-  wrapWord : wrapWord,
+  wrapMainWordWithWordClassSpan: wrapMainWordWithWordClassSpan,
   synonymiseLastWord : synonymiseLastWord,
   findSynonyms : findSynonyms
 

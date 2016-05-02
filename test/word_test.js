@@ -26,11 +26,11 @@ describe('wordsmith', function() {
 		})
 	})
 
-  describe('wrapWord', function(){
+  describe('wrapMainWordWithWordClassSpan', function(){
     it('wraps the whole word in span class word', function(){
       var string = 'Life was turbulent and <span class="suggestions"><span class="suggestion">anarchical</span><span class="suggestion">lawless</span></span>anarchic'
       var st = 'Life was turbulent and <span class="suggestions"><span class="suggestion">anarchical</span><span class="suggestion">lawless</span></span><span class="word">anarchic</span>'
-      expect(wordsmith.wrapWord('anarchic', string)).to.equal(st)
+      expect(wordsmith.wrapMainWordWithWordClassSpan('anarchic', string)).to.equal(st)
     })
   })
 

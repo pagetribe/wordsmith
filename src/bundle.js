@@ -56,10 +56,31 @@
 	  tags: null
 	});
 
-	function insertElement() {
+	function removeLastWord() {
+	  var sel = window.getSelection();
+	  var range;
+	  if (sel.rangeCount > 0) {
+	      range = sel.getRangeAt(0).cloneRange();
+	      range.collapse(true);
+	      range.setStart(sel.anchorNode, 0);
+	  }
+	  var words = range.toString().trim().split(' ');
+	  var lastWord = words[words.length - 1];
+	  /* Find word start and end */
+	  var wordStart = range.toString().lastIndexOf(lastWord);
+	  var wordEnd = wordStart + lastWord.length + 1; // + 1 added to remove a space before the word (buggy)
+	  console.log("pos: (" + wordStart + ", " + wordEnd + ")");
+
+	  range.setStart(sel.anchorNode, wordStart);
+	  range.setEnd(sel.anchorNode, wordEnd);
+	  range.deleteContents();
+	}
+
+	function insertElement(elem) {
 	  medium.focus();
 	  medium.insertHtml(
-	    wordSmith.wrapWith('span', 'hello', 'helloClass')
+	    elem
+	    // wordSmith.wrapWith('span', 'hello', 'helloClass')
 
 	            // '<span style="background-color: yellow;">\
 	            // Happy day!\
@@ -71,38 +92,46 @@
 	}
 
 	function spacePressed() {
-	  console.log(wordSmith.synonymiseLastWord(article.textContent))
-	  getWordPrecedingCaret(article);
-	  insertElement();
-	}
+	  var str = article.textContent
+	  var lastWord = str.match(/(\S+)\s*$/)[1].replace(/[.,!?:;'"-%]+/g,'') //needed for lookup only
+	  // var lastWordRemoved = str.substring(0, str.lastIndexOf(" "))
 
-	function getWordPrecedingCaret(containerEl) {
-	  var precedingWord = "";
-	  var sel;
-	  var range;
-	  var precedingRange;
-	  if (window.getSelection) {
-	    sel = window.getSelection();
-	    if (sel.rangeCount > 0) {
-	      range = sel.getRangeAt(0).cloneRange();
-	      range.collapse(false);
-	      // sel.collapse(containerEl.firstChild, 0)
-	      range.setStart(containerEl, 0);
-	      // TODO: see if regex get the whole word (and maybe greater than 3 chars in length) think this can be make more efficient
-	      precedingWord = range.toString().split(" ").pop().replace(/[.,!?:;'"-%]+/g,''); //gets word before caret and removes punctuation
-	    }
-	  } else if ( (sel = document.selection) && sel.type != "Control") {
-	    range = sel.createRange();
-	    precedingRange = range.duplicate();
-	    precedingRange.moveToElementText(containerEl);
-	    precedingRange.setEndPoint("EndToStart", range);
-	    precedingWord = precedingRange.text.slice(-1);
+	  var foundSynonyms = wordSmith.findSynonyms(lastWord)
+	  if(foundSynonyms) {
+	    var suggestions = wordSmith.synonymiseLastWord(lastWord)
+	    removeLastWord();
+	    console.log(wordSmith.synonymiseLastWord(lastWord))
+	    insertElement(suggestions + '&nbsp')
 	  }
-	  console.log(precedingWord)
-	  return precedingWord;
 	}
 
-	getWordPrecedingCaret(article);
+	// function getWordPrecedingCaret(containerEl) {
+	//   var precedingWord = "";
+	//   var sel;
+	//   var range;
+	//   var precedingRange;
+	//   if (window.getSelection) {
+	//     sel = window.getSelection();
+	//     if (sel.rangeCount > 0) {
+	//       range = sel.getRangeAt(0).cloneRange();
+	//       range.collapse(false);
+	//       // sel.collapse(containerEl.firstChild, 0)
+	//       range.setStart(containerEl, 0);
+	//       // TODO: see if regex get the whole word (and maybe greater than 3 chars in length) think this can be make more efficient
+	//       precedingWord = range.toString().split(" ").pop().replace(/[.,!?:;'"-%]+/g,''); //gets word before caret and removes punctuation
+	//     }
+	//   } else if ( (sel = document.selection) && sel.type != "Control") {
+	//     range = sel.createRange();
+	//     precedingRange = range.duplicate();
+	//     precedingRange.moveToElementText(containerEl);
+	//     precedingRange.setEndPoint("EndToStart", range);
+	//     precedingWord = precedingRange.text.slice(-1);
+	//   }
+	//   console.log(precedingWord)
+	//   return precedingWord;
+	// }
+
+	// getWordPrecedingCaret(article);
 
 	article.onkeyup = function(e) {
 	  if(e.keyCode == 32) {
@@ -185,18 +214,18 @@
 		return str.replace(/(\S+)\s*$/, suggestions + '$1')
 	}
 
-	function wrapWord(word, str) {
+	function wrapMainWordWithWordClassSpan(word, str) {
 	  var regex = new RegExp('\\b' + word + '\\b') //whole word
 	  return str.replace(regex, wrapWith('span', word, 'word'))
 	}
 
 	function synonymiseLastWord(str) {
-	  var lastWord = str.match(/(\S+)\s*$/)[0] //needed for lookup only
+	  var lastWord = str.match(/(\S+)\s*$/)[0].replace(/[.,!?:;'"-%]+/g,'').trim() //needed for lookup only
 	  var foundSynonyms = findSynonyms(lastWord)
 	  if(foundSynonyms) {
 	    var suggestions = buildSuggestions(foundSynonyms)
 	    var withSuggestions = appendSuggestionsToLastWord(suggestions, str)
-	    return wrapWord(lastWord, withSuggestions)
+	    return wrapMainWordWithWordClassSpan(lastWord, withSuggestions)
 	  }
 	}
 
@@ -216,7 +245,7 @@
 	  wrapWith     : wrapWith,
 	  buildSuggestions : buildSuggestions,
 	  appendSuggestionsToLastWord: appendSuggestionsToLastWord,
-	  wrapWord : wrapWord,
+	  wrapMainWordWithWordClassSpan: wrapMainWordWithWordClassSpan,
 	  synonymiseLastWord : synonymiseLastWord,
 	  findSynonyms : findSynonyms
 
