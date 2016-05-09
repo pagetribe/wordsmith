@@ -54,6 +54,26 @@ function findSynonyms(word) {
   }
 }
 
+// function removeLastWord() {
+//   var sel = window.getSelection();
+//   var range;
+//   if (sel.rangeCount > 0) {
+//       range = sel.getRangeAt(0).cloneRange();
+//       range.collapse(true);
+//       range.setStart(sel.anchorNode, 0);
+//   }
+//   var words = range.toString().trim().split(' ');
+//   var lastWord = words[words.length - 1];
+//    Find word start and end
+//   var wordStart = range.toString().lastIndexOf(lastWord);
+//   var wordEnd = wordStart + lastWord.length + 1; // + 1 added to remove a space before the word (buggy)
+//   console.log("pos: (" + wordStart + ", " + wordEnd + ")");
+
+//   range.setStart(sel.anchorNode, wordStart);
+//   range.setEnd(sel.anchorNode, wordEnd);
+//   range.deleteContents();
+// }
+
 module.exports = {
   wrapWith     : wrapWith,
   buildSuggestions : buildSuggestions,

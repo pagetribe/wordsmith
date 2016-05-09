@@ -55,7 +55,7 @@ function spacePressed() {
     var suggestions = wordSmith.synonymiseLastWord(lastWord)
     removeLastWord();
     console.log(wordSmith.synonymiseLastWord(lastWord))
-    insertElement(suggestions + '&nbsp')
+    insertElement(suggestions + '&nbsp') //extra space required to move caret
   }
 }
 
