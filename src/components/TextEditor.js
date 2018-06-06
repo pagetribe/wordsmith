@@ -2,7 +2,9 @@ import React from "react";
 import { CompositeDecorator, Editor, EditorState, Modifier } from "draft-js";
 import SynonymSelector from './SynonymSelector'
 import Menu from './Menu'
-// import '../menu.css'
+// import 'draft-js/dist/Draft.css'
+
+
 
 const dictionary = {
   made: ["created", "produced", "devised", "designed", "established"],
@@ -29,8 +31,28 @@ export default class TextEditor extends React.Component {
       selectedWord: '',
       isMenuVisible: false
     }
+
+    this.styles = {
+      editor: {
+        // margin: '0 auto',
+        // maxWidth: '80%',
+        textAlign: 'center',
+        height: '40vh',
+        borderRadius: '4px',
+        border: "1px solid #ddd",
+        // cursor: "text",
+        // fontSize: 16,
+        padding: 10,
+        // backgroundColor: '#fff',
+        color: '#333',
+      }
+    }
     
-    this.focus = () => this.refs.editor.focus()
+    
+    this.focus = () => {
+      this.styles.editor = {...this.styles.editor, ...{textAlign: 'left'}}
+      this.refs.editor.focus()
+    }
 
     this.onChange = editorState => {
       if (editorState.getSelection().isCollapsed() && this.state.selectedWord.length) { //handles when menu not clicked and user re-interacts with editor
@@ -81,14 +103,15 @@ export default class TextEditor extends React.Component {
 
   render() {
     return (
-      <div style={styles.root}>
-        <div id='editor' style={styles.editor} onClick={this.focus}>
+      <div>
+        <div id='editor' style={this.styles.editor} onClick={this.focus}>
           <Editor
             editorState={this.state.editorState}
             onChange={this.onChange}
-            placeholder="Write a something..."
+            placeholder="Paste text or start typing below..."
             ref="editor"
             spellCheck={true}
+            textAlign='align-center'
           />
         </div>
         
@@ -103,7 +126,7 @@ export default class TextEditor extends React.Component {
 
         <input
           onClick={this.logState}
-          style={styles.button}
+          // style={styles.button}
           type="button"
           value="Log State"
         />
@@ -135,22 +158,18 @@ function findWithRegex(regex, contentBlock, callback) {
   });
 }
 
-const styles = {
-  root: {
-    fontFamily: "'Helvetica', sans-serif",
-    padding: 20,
-    width: 600
-  },
-  editor: {
-    'margin-top': '100px',
-    border: "1px solid #ddd",
-    cursor: "text",
-    fontSize: 16,
-    minHeight: 40,
-    padding: 10
-  },
-  button: {
-    marginTop: 10,
-    textAlign: "center"
-  }
-};
+// const styles = {
+//   editor: {
+//     // margin: '0 auto',
+//     // maxWidth: '80%',
+//     // textAlign: 'left',
+//     height: '40vh',
+//     borderRadius: '4px',
+//     border: "1px solid #ddd",
+//     // cursor: "text",
+//     // fontSize: 16,
+//     padding: 10,
+//     // backgroundColor: '#fff',
+//     color: '#7F7F7F'
+//   }
+// };

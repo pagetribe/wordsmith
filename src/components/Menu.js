@@ -1,6 +1,5 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { dictionary } from "../synonym_dictionary";
+import React from "react"
+import ReactDOM from "react-dom"
 
 export default class Menu extends React.Component {
   constructor() {

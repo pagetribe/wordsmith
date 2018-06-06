@@ -1,8 +1,5 @@
 import React from "react"
-import Menu from './Menu'
 import selectText from '../utils/selectText'
-
-import {dictionary} from '../synonym_dictionary'
 
 export default class SynonymSelector extends React.Component {
   constructor() {
