@@ -3,17 +3,17 @@ import selectText from '../utils/selectText'
 
 export default class SynonymSelector extends React.Component {
   constructor() {
-    super();
-    this.state = { word: "" };
-    this.handleClick = this.handleClick.bind(this);
+    super()
+    this.state = { word: "" }
+    this.handleClick = this.handleClick.bind(this)
   }
 
   componentDidMount() {
-    this.setState({ word: this.props.decoratedText });
+    this.setState({ word: this.props.decoratedText })
+    this.props.incrementFoundWordCount()
   }
 
   handleClick = e => {
-    // select word and show menu above with synonyms
     selectText(e.target)
     this.props.handleSynonymWordSelection(e)
     console.log(this.state.word)

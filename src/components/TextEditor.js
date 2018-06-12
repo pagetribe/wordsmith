@@ -18,10 +18,11 @@ export default class TextEditor extends React.Component {
     super()
     const compositeDecorator = new CompositeDecorator([
       {
-        strategy: hashtagStrategy,
+        strategy: this.hashtagStrategy,
         component: SynonymSelector,
         props: {
-          handleSynonymWordSelection: this.handleSynonymWordSelection
+          handleSynonymWordSelection: this.handleSynonymWordSelection,
+          incrementFoundWordCount: this.incrementFoundWordCount,
         }
       }
     ])
@@ -29,7 +30,8 @@ export default class TextEditor extends React.Component {
     this.state = {
       editorState: EditorState.createEmpty(compositeDecorator),
       selectedWord: '',
-      isMenuVisible: false
+      isMenuVisible: false,
+      foundWordCount: 0,
     }
 
     this.styles = {
@@ -45,6 +47,9 @@ export default class TextEditor extends React.Component {
         padding: 10,
         // backgroundColor: '#fff',
         color: '#333',
+      },
+      counter: {
+        color: 'black'
       }
     }
     
@@ -63,6 +68,30 @@ export default class TextEditor extends React.Component {
     }
 
     this.logState = () => console.log(this.state.editorState.toJS())
+    // this.findWithRegex = this.findWithRegex.bind(this)
+
+  }
+
+  hashtagStrategy = (contentBlock, callback, contentState) => {
+    this.findWithRegex(HASHTAG_REGEX, contentBlock, callback)
+  }
+  
+  findWithRegex = (regex, contentBlock, callback) => {
+    const text = contentBlock.getText();
+    
+    dictionaryKeys.map(word => {
+      let matchArr, start;
+      var regex = new RegExp(word, "gi");
+
+      while ((matchArr = regex.exec(text)) !== null) {
+        start = matchArr.index;
+        callback(start, start + matchArr[0].length)
+      }
+    })
+  }
+
+  incrementFoundWordCount = (action) => {
+    this.setState((prevState, props) => ({foundWordCount: prevState.foundWordCount + 1}))
   }
 
   handleSynonymWordSelection = (e) => {
@@ -75,13 +104,14 @@ export default class TextEditor extends React.Component {
   }
 
   handleSynonymClick = (e) => {
-    console.log(this)
-    console.log('yah: ', e.target.innerText)
-    
-    this.setState({isMenuVisible: false})
+    this.setState((prevState, props) => (
+      { 
+        isMenuVisible: false,
+        foundWordCount: prevState.foundWordCount - 1
+      }
+    ))
     
     const selectionState = this.state.editorState.getSelection()
-
 
     const contentStateWithReplacedText = Modifier.replaceText(
       this.state.editorState.getCurrentContent(),
@@ -104,7 +134,10 @@ export default class TextEditor extends React.Component {
   render() {
     return (
       <div>
+        <h1 style={this.styles.counter}>count: {this.state.foundWordCount}</h1>
         <div id='editor' style={this.styles.editor} onClick={this.focus}>
+
+
           <Editor
             editorState={this.state.editorState}
             onChange={this.onChange}
@@ -114,6 +147,8 @@ export default class TextEditor extends React.Component {
             textAlign='align-center'
           />
         </div>
+
+        
         
         {
           this.state.isMenuVisible &&
@@ -142,21 +177,22 @@ export default class TextEditor extends React.Component {
 // const HASHTAG_REGEX = /#[\w\u0590-\u05ff]+/g;
 const HASHTAG_REGEX = /long|short+/g;
 
-function hashtagStrategy(contentBlock, callback, contentState) {
-  findWithRegex(HASHTAG_REGEX, contentBlock, callback);
-}
+// function hashtagStrategy(contentBlock, callback, contentState) {
+//   this.findWithRegex(HASHTAG_REGEX, contentBlock, callback)
+// }
 
-function findWithRegex(regex, contentBlock, callback) {
-  const text = contentBlock.getText();
-  dictionaryKeys.map(word => {
-    let matchArr, start;
-    var regex = new RegExp(word, "gi");
-    while ((matchArr = regex.exec(text)) !== null) {
-      start = matchArr.index;
-      callback(start, start + matchArr[0].length);
-    }
-  });
-}
+// function findWithRegex(regex, contentBlock, callback) {
+//   const text = contentBlock.getText();
+//   dictionaryKeys.map(word => {
+//     let matchArr, start;
+//     var regex = new RegExp(word, "gi");
+//     while ((matchArr = regex.exec(text)) !== null) {
+//       start = matchArr.index;
+//       this.setState((prevState, props) => ({foundWordCount: prevState.foundWordCount + 1}))
+//       callback(start, start + matchArr[0].length)
+//     }
+//   });
+// }
 
 // const styles = {
 //   editor: {

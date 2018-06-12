@@ -13,7 +13,10 @@ class App extends Component {
           </header>
           <p className="intro">
             <p style={{'marginBottom': '4px'}}>Smart way to check you're using active language.</p>
-            <p style={{'marginTop': '0px'}}>Improve your cover letter or resume with this free tool.</p>
+            <p style={{'marginTop': '0px'}}>
+              Improve your <b>cover letter</b> or <b>resume</b> with this free tool.<br />
+              Type or paste text into the editor below and we'll check for passive words that recruiters and employers hate to see.
+            </p>
           </p>
         </div>
         <div className='editor'>
