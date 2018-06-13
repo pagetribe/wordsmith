@@ -2,9 +2,8 @@ import React from "react";
 import { CompositeDecorator, Editor, EditorState, Modifier } from "draft-js";
 import SynonymSelector from './SynonymSelector'
 import Menu from './Menu'
+import CardFlip from './CardFlip'
 // import 'draft-js/dist/Draft.css'
-
-
 
 const dictionary = {
   made: ["created", "produced", "devised", "designed", "established"],
@@ -134,9 +133,9 @@ export default class TextEditor extends React.Component {
   render() {
     return (
       <div>
-        <h1 style={this.styles.counter}>count: {this.state.foundWordCount}</h1>
         <div id='editor' style={this.styles.editor} onClick={this.focus}>
 
+          <CardFlip counter={this.state.foundWordCount} success={""} />
 
           <Editor
             editorState={this.state.editorState}
@@ -146,6 +145,7 @@ export default class TextEditor extends React.Component {
             spellCheck={true}
             textAlign='align-center'
           />
+
         </div>
 
         
