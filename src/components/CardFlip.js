@@ -28,7 +28,7 @@ const styles = {
       "position": "relative",
       "fontWeight": "bold",
       "textAlign": "center",
-      "lineHeight": "2.1em",
+      "lineHeight": "2.3em",
       "color": "white",
       "fontSize": "11px"
     },
