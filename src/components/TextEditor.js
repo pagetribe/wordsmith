@@ -3,6 +3,7 @@ import { CompositeDecorator, Editor, EditorState, Modifier } from "draft-js";
 import SynonymSelector from './SynonymSelector'
 import Menu from './Menu'
 import CardFlip from './CardFlip'
+import ArcUpRight from './ArcUpRight'
 // import 'draft-js/dist/Draft.css'
 
 const dictionary = {
@@ -22,6 +23,7 @@ export default class TextEditor extends React.Component {
         props: {
           handleSynonymWordSelection: this.handleSynonymWordSelection,
           incrementFoundWordCount: this.incrementFoundWordCount,
+          decrementFoundWordCount: this.decrementFoundWordCount
         }
       }
     ])
@@ -30,11 +32,13 @@ export default class TextEditor extends React.Component {
       editorState: EditorState.createEmpty(compositeDecorator),
       selectedWord: '',
       isMenuVisible: false,
+      isCounterVisible: false,
       foundWordCount: 0,
     }
 
     this.styles = {
       editor: {
+        postion: 'relative',
         // margin: '0 auto',
         // maxWidth: '80%',
         textAlign: 'center',
@@ -90,7 +94,17 @@ export default class TextEditor extends React.Component {
   }
 
   incrementFoundWordCount = (action) => {
-    this.setState((prevState, props) => ({foundWordCount: prevState.foundWordCount + 1}))
+    this.setState((prevState, props) => ({
+      foundWordCount: prevState.foundWordCount + 1,
+      isCounterVisible: true
+    }))
+  }
+
+  decrementFoundWordCount = (action) => {
+    this.setState((prevState, props) => ({
+      foundWordCount: prevState.foundWordCount - 1,
+      isCounterVisible: true
+    }))
   }
 
   handleSynonymWordSelection = (e) => {
@@ -103,12 +117,7 @@ export default class TextEditor extends React.Component {
   }
 
   handleSynonymClick = (e) => {
-    this.setState((prevState, props) => (
-      { 
-        isMenuVisible: false,
-        foundWordCount: prevState.foundWordCount - 1
-      }
-    ))
+    this.setState({ isMenuVisible: false })
     
     const selectionState = this.state.editorState.getSelection()
 
@@ -135,8 +144,6 @@ export default class TextEditor extends React.Component {
       <div>
         <div id='editor' style={this.styles.editor} onClick={this.focus}>
 
-          <CardFlip counter={this.state.foundWordCount} success={""} />
-
           <Editor
             editorState={this.state.editorState}
             onChange={this.onChange}
@@ -145,6 +152,13 @@ export default class TextEditor extends React.Component {
             spellCheck={true}
             textAlign='align-center'
           />
+
+          {
+            (this.state.foundWordCount >= 1 || this.state.isCounterVisible) &&
+              <ArcUpRight render={ () => <CardFlip counter={this.state.foundWordCount} success={"fixed"} /> } />
+          }
+          
+
 
         </div>
 

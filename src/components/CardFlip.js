@@ -15,12 +15,9 @@ const styles = {
     cardContainer: {
       "perspective": "700px",
       "zIndex": "1",
-      "position": "absolute",
-      "right": "-32px",
-      "top": "-10px"
     },
     card: {
-      "margin": "20px",
+      "margin": "13px",
       "transition": "all 0.6s ease",
       "transformStyle": "preserve-3d",
       "width": "25px",
@@ -40,6 +37,7 @@ const styles = {
       "border": "6px solid white",
       "boxShadow": "0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12)",
       "left": "-6px",
+      "top": '-6px',
       "borderRadius": "50%"
     },
     front: {

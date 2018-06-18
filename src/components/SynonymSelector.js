@@ -13,6 +13,10 @@ export default class SynonymSelector extends React.Component {
     this.props.incrementFoundWordCount()
   }
 
+  componentWillUnmount() {
+    this.props.decrementFoundWordCount()
+  }
+
   handleClick = e => {
     selectText(e.target)
     this.props.handleSynonymWordSelection(e)
