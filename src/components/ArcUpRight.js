@@ -3,13 +3,10 @@ import styled, { keyframes } from 'styled-components'
 
 const Wrapper = styled.div`
     transition: transform 0.4s ease;
-    width: 400px;
-    height: 400px;
     position: relative;
     width: 50px;
     height: 50px;
     transform: translate(-50%, -50%);
-    position: absolute;
     top: 50%;
     left: 50%;
 `
@@ -18,7 +15,7 @@ const Content = styled.div`
     width: 50px;
     height: 50px;
     transform: translate(-50%, -50%);
-    position: absolute;
+    position: relative;
     top: 50%;
     left: 50%;
     border-radius: 50%;  
