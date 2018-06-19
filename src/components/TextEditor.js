@@ -2,9 +2,8 @@ import React from "react";
 import { CompositeDecorator, Editor, EditorState, Modifier } from "draft-js";
 import SynonymSelector from './SynonymSelector'
 import Menu from './Menu'
-import CardFlip from './CardFlip'
+import CounterCardFlip from './CounterCardFlip'
 import ArcUpRight from './ArcUpRight'
-// import 'draft-js/dist/Draft.css'
 
 const dictionary = {
   made: ["created", "produced", "devised", "designed", "established"],
@@ -155,7 +154,7 @@ export default class TextEditor extends React.Component {
 
           {
             (this.state.foundWordCount >= 1 || this.state.isCounterVisible) &&
-              <ArcUpRight render={ () => <CardFlip counter={this.state.foundWordCount} success={"fixed"} /> } />
+              <ArcUpRight render={ () => <CounterCardFlip counter={this.state.foundWordCount} /> } />
           }
           
 
