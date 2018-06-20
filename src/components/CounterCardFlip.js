@@ -1,10 +1,13 @@
-import React from "react";
+import React from "react"
+import BounceIn from './animation/BounceIn'
 
 export default ({ counter }) => {
   return (
     <div style={styles.cardContainer}>
       <div style={Object.assign({}, styles.card, counter === 0 && styles.success)}>
-        <div style={{...styles.fontAndBack, ...styles.front}}>{counter}</div>
+        <div style={{...styles.fontAndBack, ...styles.front}}>
+          <BounceIn watchForChange={counter} render={() => <span>{counter}</span>} />
+        </div>
         <div style={{...styles.fontAndBack, ...styles.back}}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
             <path className={counter === 0 && "checkmark-check"} fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
