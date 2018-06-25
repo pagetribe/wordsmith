@@ -4,13 +4,7 @@ import SynonymSelector from './SynonymSelector'
 import Menu from './Menu'
 import CounterCardFlip from './CounterCardFlip'
 import ArcUpRight from './ArcUpRight'
-
-const dictionary = {
-  made: ["created", "produced", "devised", "designed", "established"],
-  gave: ["provided", "supplied", "presented"]
-};
-
-const dictionaryKeys = Object.keys(dictionary);
+import {dictionary, dictionaryKeys} from '../synonym_dictionary'
 
 export default class TextEditor extends React.Component {
   constructor() {
