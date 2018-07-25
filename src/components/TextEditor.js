@@ -164,14 +164,6 @@ export default class TextEditor extends React.Component {
               onClick={this.handleSynonymClick}
             />
         }
-        
-
-        <input
-          onClick={this.logState}
-          // style={styles.button}
-          type="button"
-          value="Log State"
-        />
       </div>
     );
   }
