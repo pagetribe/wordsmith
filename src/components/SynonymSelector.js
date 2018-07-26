@@ -40,6 +40,7 @@ export default class SynonymSelector extends React.Component {
 const styles = {
   synonymMatch: {
     cursor: 'pointer',
-    color: "rgba(95, 184, 138, 1.0)"
+    color: '#bd081c',
+    textDecoration: 'underline'
   }
 };
