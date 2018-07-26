@@ -18,7 +18,7 @@ class App extends Component {
               Improve your <b>cover letter</b> or <b>resume</b> with this free tool.<br />
               Type or paste text into the editor below and we'll check for passive words that recruiters and employers hate to see.<br />
               Interactive Mini thesaurus of action verbs (power words) to improve your resume.<br />
-              Get started now by pasting text or typing in the editor box below.
+              <p>Get started now by pasting text or typing in the editor box below.</p>
             </p>
           </div>
         </div>
