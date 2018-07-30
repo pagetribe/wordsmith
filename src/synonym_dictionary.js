@@ -6,6 +6,7 @@ const dictionary = {
     changed:    ["replaced", "upgraded", "streamlined", "restructured" ],
     created:    ["developed", "implemented", "established", "devised"],
     helped:     ["advocated", "clarified", "guided", "coached"],
+    improved:   ["enhanced", "strengthened", "boosted"],
     increased:  ["enhanced", "advanced", "generated", "streamlined"],
     led:        ["directed", "orchestrated", "trained", "headed"],
     organised:  ["executed", "maintained", "categorised", "inspected"],
