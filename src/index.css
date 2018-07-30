@@ -148,3 +148,9 @@ h2 {
   color: #9197a3;
 } 
 
+
+.social {
+  margin: 10px 0px 10px 0px;
+  width: 100%;
+  text-align: center
+}
