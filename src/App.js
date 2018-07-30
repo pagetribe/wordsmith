@@ -27,7 +27,9 @@ class App extends Component {
           <TextEditor />
         </div>
         <div className="center-div">
-          <SocialIcon url="http://twitter.com/pagetribe" style={{ height: 35, width: 35 }}/>
+          <SocialIcon url="http://twitter.com/pagetribe" network="twitter" style={{ height: 30, width: 30, marginRight: '3px' }}/>
+          <SocialIcon url="http://facebook.com/" network="facebook" style={{ height: 30, width: 30, marginRight: '3px' }}/>
+          <SocialIcon url="http://linkedin.com/" network="linkedin" style={{ height: 30, width: 30 }}/>
         </div>
       </div>
     );
