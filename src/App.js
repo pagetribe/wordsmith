@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import TextEditor from './components/TextEditor'
+import { SocialIcon } from 'react-social-icons';
 
 class App extends Component {
   render() {
@@ -26,7 +27,7 @@ class App extends Component {
           <TextEditor />
         </div>
         <div className="center-div">
-        
+          <SocialIcon url="http://twitter.com/pagetribe" style={{ height: 35, width: 35 }}/>
         </div>
       </div>
     );
