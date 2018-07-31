@@ -28,7 +28,7 @@ class App extends Component {
         <div className="social">
           <div className='twitter'>
             <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" className="twitter-share-button" data-show-count="false">Tweet</a>
-            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
           </div>
           <div className='linkedin'>
             <script type="IN/Share" data-url="https://pagetribe.github.io/wordsmith/"></script>
