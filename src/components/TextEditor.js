@@ -102,7 +102,7 @@ export default class TextEditor extends React.Component {
 
   handleSynonymWordSelection = (e) => {
     this.setState({ 
-      selectedWord: e.target.innerText,
+      selectedWord: e.target.innerText.toLowerCase(),
       isMenuVisible: true
     })
     
