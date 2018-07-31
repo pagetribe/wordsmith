@@ -154,3 +154,17 @@ h2 {
   width: 100%;
   text-align: center
 }
+
+.tour {
+  text-align: center;
+  color: #333;
+  padding-left: 10%;
+  padding-right: 10%;
+  font-family: serif;
+  margin-bottom: 50px;
+}
+
+.tour > h2 {
+  margin-top: 30px;
+  color: #09143b;
+}
