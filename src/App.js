@@ -17,13 +17,8 @@ class App extends Component {
           </header>
           <div className="intro">
             <p>Missing the right active words for your cover letter or resume?</p>
-            <p>Interactive Mini thesaurus of action verbs (power words) to improve your resume.<br />
-            <p>
-              Make sure you are not using the most common passive words an improve your <b>cover letter</b> or <b>resume</b> with this free tool.<br />
-            </p>
+            <p>Make sure you are not using the most common passive words an improve your <b>cover letter</b> or <b>resume</b> with this free tool.</p>
             <p>Type or paste text into the editor below and we'll check for passive words that recruiters and employers hate to see.</p>
-            </p>
-            
             <p>Get started now by pasting text or typing in the editor box below.</p>
           </div>
         </div>
