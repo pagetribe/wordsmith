@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import TextEditor from './components/TextEditor'
+import pasteDemoGif from './pastedemo.gif'
 
 class App extends Component {
   render() {
@@ -10,15 +11,19 @@ class App extends Component {
           <header>
             <h1><span id='cursor'>I</span> Suggester.</h1>
             <h2>Find active word alternatives</h2>
+            <div className="paste-demo-gif">
+              <img src={pasteDemoGif} alt="Demo of app usage" />
+            </div>
           </header>
           <div className="intro">
-            <p style={{'marginBottom': '4px'}}>Missing the right active words for your cover letter or resume?</p>
-            <p style={{'marginTop': '0px'}}>
-              Make sure you are not using the most common passive words.<br />
-              Improve your <b>cover letter</b> or <b>resume</b> with this free tool.<br />
-              Type or paste text into the editor below and we'll check for passive words that recruiters and employers hate to see.<br />
-              Interactive Mini thesaurus of action verbs (power words) to improve your resume.<br />
+            <p>Missing the right active words for your cover letter or resume?</p>
+            <p>Interactive Mini thesaurus of action verbs (power words) to improve your resume.<br />
+            <p>
+              Make sure you are not using the most common passive words an improve your <b>cover letter</b> or <b>resume</b> with this free tool.<br />
             </p>
+            <p>Type or paste text into the editor below and we'll check for passive words that recruiters and employers hate to see.</p>
+            </p>
+            
             <p>Get started now by pasting text or typing in the editor box below.</p>
           </div>
         </div>
