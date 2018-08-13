@@ -92,12 +92,8 @@ h2 {
   max-width: 95%;
   width: 85%;
   text-align: center;
-  /* height: 60%; */
   background-color: #fbfbfb;
-  /* margin-top: -2%; */
   border: var(--border-width) solid #fff;
-  /* border-radius: 5px; */
-  /* outline: #fff solid 6px; */
 }
 
 #cursor {

@@ -21,9 +21,10 @@ class App extends Component {
             <p>Type or paste text into the editor below and we'll check for passive words that recruiters and employers hate to see.</p>
             <p>Get started now by pasting text or typing in the editor box below.</p>
           </div>
-        </div>
+        
         <div className='editor'>
           <TextEditor />
+        </div>
         </div>
         <div className="social">
           <div className='twitter'>
