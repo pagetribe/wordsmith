@@ -36,7 +36,7 @@ export default class AcrUpRight extends React.Component {
     setAnimation()
     
     function setAnimation(e) {
-        let targetYPosition = (container.getBoundingClientRect().height + content.getBoundingClientRect().height ) / 2
+        let targetYPosition = (container.getBoundingClientRect().height + content.getBoundingClientRect().height ) * 4
         content.style.transform = `translateY(-${targetYPosition}px)`
   
         let targetXPosition = container.getBoundingClientRect().width / 2 - content.getBoundingClientRect().width

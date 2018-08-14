@@ -73,7 +73,8 @@ export default class TextEditor extends React.Component {
     
     dictionaryKeys.map(word => {
       let matchArr, start;
-      var regex = new RegExp(word, "gi");
+      var regex = new RegExp("\\b" + word + "\\b", "gi");
+      console.log(regex)
 
       while ((matchArr = regex.exec(text)) !== null) {
         start = matchArr.index;
@@ -135,7 +136,7 @@ export default class TextEditor extends React.Component {
           <Editor
             editorState={this.state.editorState}
             onChange={this.onChange}
-            placeholder="Paste text or start typing below..."
+            placeholder="Paste text or start typing ..."
             ref="editor"
             spellCheck={true}
             textAlign='align-center'
