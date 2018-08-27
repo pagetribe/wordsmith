@@ -22,7 +22,7 @@ const Content = styled.div`
     transition: transform 0.6s;    
 `
 
-export default class AcrUpRight extends React.Component {
+export default class ArcUpRight extends React.Component {
   constructor(props) {
     super(props)
     this.wrapper =  React.createRef()
@@ -36,7 +36,7 @@ export default class AcrUpRight extends React.Component {
     setAnimation()
     
     function setAnimation(e) {
-        let targetYPosition = (container.getBoundingClientRect().height + content.getBoundingClientRect().height ) * 4
+        let targetYPosition = (container.getBoundingClientRect().height + content.getBoundingClientRect().height ) * 3
         content.style.transform = `translateY(-${targetYPosition}px)`
   
         let targetXPosition = container.getBoundingClientRect().width / 2 - content.getBoundingClientRect().width

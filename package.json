@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://pagetribe.github.io/wordsmith/",
   "dependencies": {
+    "@material-ui/core": "^1.5.1",
     "draft-js": "^0.10.5",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import TextEditor from './components/TextEditor'
+import ContactForm from './components/ContactForm'
 import pasteDemoGif from './pastedemo.gif'
 
 class App extends Component {
@@ -57,7 +58,18 @@ class App extends Component {
               <p>Use this interactive mini thesaurus of action verbs (power words) to improve your resume.</p>
             </div>
           </div>
+
         </div>
+
+        <section>
+            <i className="chevron"></i>
+            <div className='footer-panel'>
+              Let's stay in touch.
+              <div className='subhead'>Leave a Feedback or Comment</div>
+              <ContactForm />
+            </div>
+        </section>
+
       </div>
     );
   }
